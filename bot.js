@@ -3,6 +3,14 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var wyniki = ["Nie i...","Nie...","Nie, ale...","Tak, ale...","Tak...","Tak i..."];
+var reakcje = ["nienawiść, chęć absolutnej anihilacji", "wrogość, intryganctwo, arogancja", "podejrzliwość, nieufność", "neutralność", "zainteresowanie, chęć poznania", "fascynacja, przyjaźń", "absolutne uwielbienie, miłość"];
+var pulapki = [];
+pulapki[0] = ["petryfikacja ciała", "mutacja ciała", "zmiana płci", "oszpecenie twarzy lub całego ciała", "drastyczne zmniejszenie ciała", "drastyczne powiększenie ciała"];
+pulapki[1] = ["zatopienie", "zasypanie piaskiem", "trująca chmura", "ożywiony posąg", "żyjące i głodne ściany", "halucynogenne zarodniki" ];
+pulapki[2] = ["dekapitujący dysk", "jama z kwasem", "alarm", "ściana włóczni", "otwarcie niebezpiecznego grobu", "ogłuszający wrzask"];
+pulapki[3] = ["przemiana w roślinę", "przemiana w ostatnio dotykaną istotę", "przemiana w złotego golema", "klątwa wampiryzmu", "klątwa likantropii", "przemiana w dzikie zwierzę"];
+pulapki[4] = ["spadające kraty", "miażdżące ściany", "eksplozja", "latające ostrza", "gotujący się olej", "wytworzenie próżni"];
+pulapki[5] = ["pełzające pod skórą robactwo", "obłęd", "pasożyt mózgu", "choroba oczu", "hemofilia", "pożarcie duszy"];
 
 client.on('ready', () => {
   console.log('I am ready!');
