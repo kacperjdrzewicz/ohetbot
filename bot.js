@@ -19,7 +19,11 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if (message.content === '.OHETE') { //Łatwy Rzut
+    if (message.content === '.OHETHelp') { //Pomoc
+        var tekst = "Komendy:\n```\n.OHETE - Łatwy rzut\n.OHETM - Przeciętny rzut\n.OHETH - Trudny rzut\n.OHETR - Tabela reakcji\n.OHETT - Tabela pułapek\n.OHETRM - Spotkania losowe\n```";
+        message.reply(tekst);
+    }
+    else if (message.content === '.OHETE') { //Łatwy Rzut
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
         var tekst = "\nTwoje rzuty: \"" + wyniki[rzut1] + "\" oraz \"" + wyniki[rzut2] + "\"\n";
