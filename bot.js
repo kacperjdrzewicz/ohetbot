@@ -12,6 +12,8 @@ pulapki[3] = ["przemiana w roślinę", "przemiana w ostatnio dotykaną istotę",
 pulapki[4] = ["spadające kraty", "miażdżące ściany", "eksplozja", "latające ostrza", "gotujący się olej", "wytworzenie próżni"];
 pulapki[5] = ["pełzające pod skórą robactwo", "obłęd", "pasożyt mózgu", "choroba oczu", "hemofilia", "pożarcie duszy"];
 
+var stwory = ["Goblin(4)", "Kobold(4)", "Leśny Duszek(4)", "Wielki Nietoperz(5)", "Ognisty Robak(5)", "Szkielet(6)", "Wielki Szczur(6)", "Wojownik(7)", "Barbarzyniec(7)", "Kultysta(7)", "Ork(8)", "Upiór(8)", "Zombie(9)", "Centaur(9)", "Troll(10)", "Harpia(11)", "Zjawy(11)", "Ogr(12)", "Wilkolak(12)", "Wampir(12)"];
+
 client.on('ready', () => {
   console.log('I am ready!');
 });
@@ -83,6 +85,13 @@ client.on('message', message => {
         var rzut2 = Math.floor((Math.random()*100))%6;
         var tekst = "\nWiersz: " + (rzut1+1) + ", Kolumna: " + (rzut2+1) + "\n";
         tekst += "Rezultat: " + pulapki[rzut1][rzut2];
+        message.reply(tekst);
+    }
+    else if(message.content === '.OHETRM') { //Losowe Spotkanie
+        var rzut1 = Math.ceil(((Math.floor((Math.random()*100))%6) + 1)/2);
+        var rzut2 = (Math.floor((Math.random()*100))%6) + 1
+        var rzut3 = Math.floor((Math.random()*100))%20;
+        var tekst = "\nLosowe spotkanie(Koncepcja): " + (rzut1+rzut2) + "x " + stwory[rzut3];
         message.reply(tekst);
     }
 });
