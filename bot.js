@@ -70,7 +70,6 @@ client.on('message', message => {
         }
         message.reply(tekst);
     }
-
     else if(message.content === '.OHETT') { //Tabela Pułapek
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
