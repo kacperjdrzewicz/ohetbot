@@ -212,10 +212,6 @@ client.on('message', message => {
         else
             iloscPotworow = 1;
 
-        /*var rzut1 = Math.ceil(((Math.floor((Math.random()*100))%6) + 1)/2);
-        var rzut2 = (Math.floor((Math.random()*100))%6) + 1
-        var rzut3 = Math.floor((Math.random()*100))%20;
-        var tekst = "\nLosowe spotkanie(Koncepcja): " + (rzut1+rzut2) + "x " + stwory[rzut3];*/
         var tekst = "Spotkanie losowe(koncepcja): " + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut2];
         message.reply(tekst);
     }
