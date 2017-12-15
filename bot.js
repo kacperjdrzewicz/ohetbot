@@ -72,8 +72,8 @@ client.on('message', message => {
                 name: ".OHETT",
                 value: "Tabela pułapek."
               },{
-                name: ".OHETRM",
-                value: "Spotkanie losowe."
+                name: ".OHETRM Koncepcja Ilość[opcjonalne]",
+                value: "Spotkanie losowe. Koncepcja - Suma koncepcji druzyny; Ilość - Ilość członków drużyny. Standardowo = 1."
               },{
                 name: ".OHETHelp",
                 value: "Lista komend."
