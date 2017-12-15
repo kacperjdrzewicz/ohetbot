@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 
 const client = new Discord.Client();
 
+const prefix = ".";
+
 var wyniki = ["Nie i...","Nie...","Nie, ale...","Tak, ale...","Tak...","Tak i..."];
 var reakcje = ["nienawiść, chęć absolutnej anihilacji", "wrogość, intryganctwo, arogancja", "podejrzliwość, nieufność", "neutralność", "zainteresowanie, chęć poznania", "fascynacja, przyjaźń", "absolutne uwielbienie, miłość"];
 var pulapki = [];
@@ -12,18 +14,80 @@ pulapki[3] = ["przemiana w roślinę", "przemiana w ostatnio dotykaną istotę",
 pulapki[4] = ["spadające kraty", "miażdżące ściany", "eksplozja", "latające ostrza", "gotujący się olej", "wytworzenie próżni"];
 pulapki[5] = ["pełzające pod skórą robactwo", "obłęd", "pasożyt mózgu", "choroba oczu", "hemofilia", "pożarcie duszy"];
 
-var stwory = ["Goblin(4)", "Kobold(4)", "Leśny Duszek(4)", "Wielki Nietoperz(5)", "Ognisty Robak(5)", "Szkielet(6)", "Wielki Szczur(6)", "Wojownik(7)", "Barbarzyniec(7)", "Kultysta(7)", "Ork(8)", "Upiór(8)", "Zombie(9)", "Centaur(9)", "Troll(10)", "Harpia(11)", "Zjawy(11)", "Ogr(12)", "Wilkolak(12)", "Wampir(12)"];
+var stwory = [];
+stwory[4] = ["Goblin(4)", "Kobold(4)", "Leśny duszek(4)"];
+stwory[5] = ["Wielki nietoperz(5)", "Ognisty robak(5)", ];
+stwory[6] = ["Wielki szczur(6)", "Szkielet(6)"];
+stwory[7] = ["Szaleniec/kultysta(7)", "Diablik(7)"];
+stwory[8] = ["Ork(8)", "Wielki skorpion(8)", "Upiór(8)"];
+stwory[9] = ["Zombie(9)", "Centaur(9)", "Minotaur(9)"];
+stwory[10] = ["Ghoul(10)", "Gargulec(10)", "Ogromny niedźwiedź(10)", "Troll(10)"];
+stwory[11] = ["Harpia(11)", "Zjawa(11)", "Galaretowata kostka(11)", "Syrena(11)"];
+stwory[12] = ["Ogr(12)", "Wilkołak(12)", "Wampir(12)"];
+stwory[13] = ["Demoniczny sługa(13)", "Chimera(13)", "Wywerna(13)"];
+stwory[14] = ["Bazyliszek(14)", "Sukub/Inkub(14)", "Mumia(14)"];
+stwory[15] = ["Licz(15)", "Banshee(15)", "Piekielny ogar(15)", "Cyklop(15)"];
+stwory[16] = ["Dżinn(16)", "Demon(16)"];
+stwory[17] = ["Żywiołak(17)", "Gryf(17)"];
+stwory[18] = ["Ifrit(18)", "Mantykora(18)"];
+stwory[19] = ["Hydra(19)", "Pegaz(19)"];
+stwory[20] = ["Meduza(20)", "Pazuzu(20)"];
+stwory[21] = ["Tytan(21)", "Kraken(21)"];
+stwory[22] = ["Smok(22)"];
+stwory[23] = ["Demogorgon(23)"];
 
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
 client.on('message', message => {
-    if (message.content === '.OHETHelp') { //Pomoc
-        var tekst = "Komendy:\n```\n.OHETE - Łatwy rzut\n.OHETM - Przeciętny rzut\n.OHETH - Trudny rzut\n.OHETR - Tabela reakcji\n.OHETT - Tabela pułapek\n.OHETRM - Spotkania losowe\n```";
-        message.reply(tekst);
+    if(!message.content.startsWith(prefix)) return;
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+
+    if (command === 'ohethelp') {
+        message.channel.send({embed: {
+            color: 3447003,
+            author: {
+              name: client.user.username,
+              icon_url: client.user.avatarURL
+            },
+            //title: "Komendy:",
+            //url: "http://google.com",
+            //description: "This is a test embed to showcase what they look like and what they can do.",
+            fields: [{
+                name: ".OHETE",
+                value: "Łatwy rzut."
+              },{
+                name: ".OHETM",
+                value: "Przeciętny rzut."
+              },{
+                name: ".OHETH",
+                value: "Trudny rzut."
+              },{
+                name: ".OHETR",
+                value: "Tabela reakcji przeciwników."
+              },{
+                name: ".OHETT",
+                value: "Tabela pułapek."
+              },{
+                name: ".OHETRM",
+                value: "Spotkanie losowe."
+              },{
+                name: ".OHETHelp",
+                value: "Lista komend."
+              }
+            ],
+            timestamp: new Date(),
+            footer: {
+              icon_url: client.user.avatarURL,
+              text: "© GaniGhost"
+            }
+          }
+        });
     }
-    else if (message.content === '.OHETE') { //Łatwy Rzut
+    else if (command === 'ohete') { //Łatwy Rzut
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
         var tekst = "\nTwoje rzuty: \"" + wyniki[rzut1] + "\" oraz \"" + wyniki[rzut2] + "\"\n";
@@ -35,12 +99,12 @@ client.on('message', message => {
         }
         message.reply(tekst);
     }
-    else if(message.content === '.OHETM') { //Przeciętny Rzut
+    else if(command === 'ohetm') { //Przeciętny Rzut
         var rzut = Math.floor((Math.random()*100))%6;
         var tekst = "\nRezultat: \"" + wyniki[rzut]+ "\"";
         message.reply(tekst);
     }
-    else if(message.content === '.OHETH') { //Trudny Rzut
+    else if(command === 'oheth') { //Trudny Rzut
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
         var tekst = "\nTwoje rzuty: \"" + wyniki[rzut1] + "\" oraz \"" + wyniki[rzut2] + "\"\n";
@@ -52,7 +116,7 @@ client.on('message', message => {
         }
         message.reply(tekst);
     }
-    else if(message.content === '.OHETR') { //Tabela Reakcji
+    else if(command === 'ohetr') { //Tabela Reakcji
         var rzut1 = (Math.floor((Math.random()*100))%6) + 1;
         var rzut2 = (Math.floor((Math.random()*100))%6) + 1;
         var tekst = "\nSuma rzutów: " + (rzut1+rzut2) + " (" + rzut1 + " + " + rzut2 + ")\n";
@@ -84,18 +148,75 @@ client.on('message', message => {
         }
         message.reply(tekst);
     }
-    else if(message.content === '.OHETT') { //Tabela Pułapek
+    else if(command === 'ohett') { //Tabela Pułapek
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
         var tekst = "\nWiersz: " + (rzut1+1) + ", Kolumna: " + (rzut2+1) + "\n";
         tekst += "Rezultat: " + pulapki[rzut1][rzut2];
         message.reply(tekst);
     }
-    else if(message.content === '.OHETRM') { //Losowe Spotkanie
-        var rzut1 = Math.ceil(((Math.floor((Math.random()*100))%6) + 1)/2);
+    else if(command === 'ohetrm') { //Losowe Spotkanie arg[0] - koncept, arg[1] = 1 - ilosc
+        var koncept = args[0];
+        var ilosc = (typeof args[1] === 'undefined') ? 1 : Number(args[1]);
+        var srednia = Math.floor(koncept/ilosc);
+        var wartosc = [];
+        var sumaWartosci = 0;
+
+        for(i = srednia; i >= 4; i--) {
+            if(i === srednia) wartosc[i] = 13;
+            else if(srednia-5 <= i)
+                wartosc[i] = 10;
+            else {
+                var zmienna = 10-((srednia-5-i)*2);
+                wartosc[i] = (zmienna < 1) ? 1 : zmienna;
+            }
+        }
+
+        for(i = srednia; i <= 23; i++) {
+            if(i === srednia) wartosc[i] = 13;
+            if(srednia+3 >= i)
+                wartosc[i] = 10;
+            else {
+                var zmienna = 10-((i-srednia+3)*2);
+                wartosc[i] = (zmienna < 1) ? 1 : zmienna;
+            }
+        }
+
+        for(i = 4; i < 24; i++) {
+            sumaWartosci += wartosc[i];
+            wartosc[i] = sumaWartosci;
+        }
+        var rzut1 = Math.floor((Math.random()*1000)%sumaWartosci) + 1;
+        var koncepcjaPotwora;
+
+        for(i = 4; i < 24; i++) {
+            if(rzut1 <= wartosc[i]) {
+                koncepcjaPotwora = i;
+                break;
+            }
+        }
+        var rzut2 = Math.floor((Math.random()*10)%stwory[koncepcjaPotwora].length);
+
+        var rzut3 = (Math.floor((Math.random()*100))%6) + 1;
+
+        var iloscPotworow;
+
+        if(srednia - koncepcjaPotwora > 5)
+            iloscPotworow = Math.floor(rzut3/2 + 2 + ilosc*2);
+        else if(srednia - koncepcjaPotwora > 0)
+            iloscPotworow = Math.floor(rzut3/2 + 1 + ilosc);
+        else if(srednia - koncepcjaPotwora === 0)
+            iloscPotworow = Math.floor(rzut3/2 + ilosc);
+        else if(srednia - koncepcjaPotwora >= -3)
+            iloscPotworow = Math.floor(rzut3/3 + ilosc);
+        else
+            iloscPotworow = 1;
+
+        /*var rzut1 = Math.ceil(((Math.floor((Math.random()*100))%6) + 1)/2);
         var rzut2 = (Math.floor((Math.random()*100))%6) + 1
         var rzut3 = Math.floor((Math.random()*100))%20;
-        var tekst = "\nLosowe spotkanie(Koncepcja): " + (rzut1+rzut2) + "x " + stwory[rzut3];
+        var tekst = "\nLosowe spotkanie(Koncepcja): " + (rzut1+rzut2) + "x " + stwory[rzut3];*/
+        var tekst = "Spotkanie losowe(koncepcja): " + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut2];
         message.reply(tekst);
     }
 });
