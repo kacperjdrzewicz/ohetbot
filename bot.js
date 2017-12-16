@@ -41,9 +41,9 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if(!message.content.startsWith(prefix)) return;
+    if(!message.content.startsWith(config.prefix)) return;
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
     if (command === 'ohethelp') {
@@ -81,7 +81,7 @@ client.on('message', message => {
             ],
             timestamp: new Date(),
             footer: {
-              icon_url: client.user.avatarURL,
+              icon_url: "https://cdn.discordapp.com/avatars/182159433030303744/1dc5d660c12cf28deb38cf144a3a6dfc.png",
               text: "© GaniGhost"
             }
           }
@@ -90,69 +90,69 @@ client.on('message', message => {
     else if (command === 'ohete') { //Łatwy Rzut
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
-        var tekst = "\nTwoje rzuty: \"" + wyniki[rzut1] + "\" oraz \"" + wyniki[rzut2] + "\"\n";
+        var tekst = "\nTwoje rzuty: `" + wyniki[rzut1] + "` oraz `" + wyniki[rzut2] + "`\n";
         if(rzut1 > rzut2) {
-            tekst += "Rezultat: \"" + wyniki[rzut1] + "\"";
+            tekst += "Rezultat: `" + wyniki[rzut1] + "`";
         }
         else {
-            tekst += "Rezultat: \"" + wyniki[rzut2] + "\"";
+            tekst += "Rezultat: `" + wyniki[rzut2] + "`";
         }
         message.reply(tekst);
     }
     else if(command === 'ohetm') { //Przeciętny Rzut
         var rzut = Math.floor((Math.random()*100))%6;
-        var tekst = "\nRezultat: \"" + wyniki[rzut]+ "\"";
+        var tekst = "\nRezultat: `" + wyniki[rzut]+ "`";
         message.reply(tekst);
     }
     else if(command === 'oheth') { //Trudny Rzut
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
-        var tekst = "\nTwoje rzuty: \"" + wyniki[rzut1] + "\" oraz \"" + wyniki[rzut2] + "\"\n";
+        var tekst = "\nTwoje rzuty: `" + wyniki[rzut1] + "` oraz `" + wyniki[rzut2] + "`\n";
         if(rzut1 > rzut2) {
-            tekst += "Rezultat: \"" + wyniki[rzut2] + "\"";
+            tekst += "Rezultat: `" + wyniki[rzut2] + "`";
         }
         else {
-            tekst += "Rezultat: \"" + wyniki[rzut1] + "\"";
+            tekst += "Rezultat: `" + wyniki[rzut1] + "`";
         }
         message.reply(tekst);
     }
     else if(command === 'ohetr') { //Tabela Reakcji
         var rzut1 = (Math.floor((Math.random()*100))%6) + 1;
         var rzut2 = (Math.floor((Math.random()*100))%6) + 1;
-        var tekst = "\nSuma rzutów: " + (rzut1+rzut2) + " (" + rzut1 + " + " + rzut2 + ")\n";
+        var tekst = "\nSuma rzutów: `" + (rzut1+rzut2) + " (" + rzut1 + " + " + rzut2 + ")`\n";
         switch(rzut1+rzut2) {
             case 2:
-                tekst += "Rezultat: " + reakcje[0];
+                tekst += "Rezultat: `" + reakcje[0] + "`";
             break;
             case 3:
-                tekst += "Rezultat: " + reakcje[1];
+                tekst += "Rezultat: `" + reakcje[1] + "`";
             break;
             case 4:
             case 5:
-                tekst += "Rezultat: " + reakcje[2];
+                tekst += "Rezultat: `" + reakcje[2] + "`";
             break;
             case 6:
             case 7:
             case 8:
-                tekst += "Rezultat: " + reakcje[3];
+                tekst += "Rezultat: `" + reakcje[3] + "`";
             break;
             case 9:
             case 10:
-                tekst += "Rezultat: " + reakcje[4];
+                tekst += "Rezultat: `" + reakcje[4] + "`";
             break;
             case 11:
-                tekst += "Rezultat: " + reakcje[5];
+                tekst += "Rezultat: `" + reakcje[5] + "`";
             break;
             case 12:
-                tekst += "Rezultat: " + reakcje[6];
+                tekst += "Rezultat: `" + reakcje[6] + "`";
         }
         message.reply(tekst);
     }
     else if(command === 'ohett') { //Tabela Pułapek
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
-        var tekst = "\nWiersz: " + (rzut1+1) + ", Kolumna: " + (rzut2+1) + "\n";
-        tekst += "Rezultat: " + pulapki[rzut1][rzut2];
+        var tekst = "\nWiersz: `" + (rzut1+1) + "`, Kolumna: `" + (rzut2+1) + "`\n";
+        tekst += "Rezultat: `" + pulapki[rzut1][rzut2] + "`";
         message.reply(tekst);
     }
     else if(command === 'ohetrm') { //Losowe Spotkanie arg[0] - koncept, arg[1] = 1 - ilosc
@@ -212,7 +212,7 @@ client.on('message', message => {
         else
             iloscPotworow = 1;
 
-        var tekst = "Spotkanie losowe(koncepcja): " + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut2];
+        var tekst = "\nSpotkanie losowe(koncepcja): `" + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut2] + "`";
         message.reply(tekst);
     }
 });
