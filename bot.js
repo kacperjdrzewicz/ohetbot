@@ -50,9 +50,9 @@ client.on('message', message => {
         const embed = new Discord.RichEmbed()
             .setAuthor("OHETBot - Komendy", client.user.avatarURL)
             .setColor("#0000aa")
-            .addField(".OHETE", "Łatwy rzut.")
-            .addField(".OHETM", "Przeciętny rzut.")
-            .addField(".OHETH", "Trudny rzut.")
+            .addField(".OHETE", "Łatwy test.")
+            .addField(".OHETM", "Przeciętny test.")
+            .addField(".OHETH", "Trudny test.")
             .addField(".OHETR", "Tabela reakcji przeciwników.")
             .addField(".OHETT", "Tabela pułapek.")
             .addField(".OHETRM Koncepcja Ilość[opcjonalne]", "Spotkanie losowe.\nKoncepcja - Suma koncepcji druzyny\nIlość - Ilość członków drużyny.[Standardowo = 1]")
@@ -72,7 +72,7 @@ client.on('message', message => {
             tekst += "Rezultat: ***" + wyniki[rzut2] + "***";
         }
         const embed = new Discord.RichEmbed()
-            .setAuthor("Łatwy rzut!", client.user.avatarURL)
+            .setAuthor("Łatwy test!", client.user.avatarURL)
             .setColor("#00aa00")
             .setDescription(tekst);
         message.channel.send({embed});
@@ -81,7 +81,7 @@ client.on('message', message => {
         var rzut = Math.floor((Math.random()*100))%6;
         var tekst = "Rezultat: ***" + wyniki[rzut] + "***";
         const embed = new Discord.RichEmbed()
-            .setAuthor("Przeciętny rzut!", client.user.avatarURL)
+            .setAuthor("Przeciętny test!", client.user.avatarURL)
             .setColor("#ffaa00")
             .setDescription(tekst);
         message.channel.send({embed});
@@ -97,7 +97,7 @@ client.on('message', message => {
             tekst += "Rezultat: ***" + wyniki[rzut1] + "***";
         }
         const embed = new Discord.RichEmbed()
-            .setAuthor("Trudny rzut!", client.user.avatarURL)
+            .setAuthor("Trudny test!", client.user.avatarURL)
             .setColor("#aa0000")
             .setDescription(tekst);
         message.channel.send({embed});
