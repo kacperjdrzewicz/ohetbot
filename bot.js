@@ -47,113 +47,107 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
     if (command === 'ohethelp') {
-        message.channel.send({embed: {
-            color: 3447003,
-            author: {
-              name: client.user.username,
-              icon_url: client.user.avatarURL
-            },
-            //title: "Komendy:",
-            //url: "http://google.com",
-            //description: "This is a test embed to showcase what they look like and what they can do.",
-            fields: [{
-                name: ".OHETE",
-                value: "Łatwy rzut."
-              },{
-                name: ".OHETM",
-                value: "Przeciętny rzut."
-              },{
-                name: ".OHETH",
-                value: "Trudny rzut."
-              },{
-                name: ".OHETR",
-                value: "Tabela reakcji przeciwników."
-              },{
-                name: ".OHETT",
-                value: "Tabela pułapek."
-              },{
-                name: ".OHETRM Koncepcja Ilość[opcjonalne]",
-                value: "Spotkanie losowe. Koncepcja - Suma koncepcji druzyny; Ilość - Ilość członków drużyny. Standardowo = 1."
-              },{
-                name: ".OHETHelp",
-                value: "Lista komend."
-              }
-            ],
-            timestamp: new Date(),
-            footer: {
-              icon_url: "https://cdn.discordapp.com/avatars/182159433030303744/1dc5d660c12cf28deb38cf144a3a6dfc.png",
-              text: "© GaniGhost"
-            }
-          }
-        });
+        const embed = new Discord.RichEmbed()
+            .setAuthor("OHETBot - Komendy", client.user.avatarURL)
+            .setColor("#0000aa")
+            .addField(".OHETE", "Łatwy rzut.")
+            .addField(".OHETM", "Przeciętny rzut.")
+            .addField(".OHETH", "Trudny rzut.")
+            .addField(".OHETR", "Tabela reakcji przeciwników.")
+            .addField(".OHETT", "Tabela pułapek.")
+            .addField(".OHETRM Koncepcja Ilość[opcjonalne]", "Spotkanie losowe.\nKoncepcja - Suma koncepcji druzyny\nIlość - Ilość członków drużyny.[Standardowo = 1]")
+            .addField(".OHETHelp", "Lista komend.")
+            .setFooter("© GaniGhost", "https://cdn.discordapp.com/avatars/182159433030303744/1dc5d660c12cf28deb38cf144a3a6dfc.png")
+            .setTimestamp();
+        message.channel.send({embed});
     }
     else if (command === 'ohete') { //Łatwy Rzut
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
-        var tekst = "\nTwoje rzuty: `" + wyniki[rzut1] + "` oraz `" + wyniki[rzut2] + "`\n";
+        var tekst = "Twoje rzuty: *" + wyniki[rzut1] + "* oraz *" + wyniki[rzut2] + "*\n";
         if(rzut1 > rzut2) {
-            tekst += "Rezultat: `" + wyniki[rzut1] + "`";
+            tekst += "Rezultat: ***" + wyniki[rzut1] + "***";
         }
         else {
-            tekst += "Rezultat: `" + wyniki[rzut2] + "`";
+            tekst += "Rezultat: ***" + wyniki[rzut2] + "***";
         }
-        message.reply(tekst);
+        const embed = new Discord.RichEmbed()
+            .setAuthor("Łatwy rzut!", client.user.avatarURL)
+            .setColor("#00aa00")
+            .setDescription(tekst);
+        message.channel.send({embed});
     }
     else if(command === 'ohetm') { //Przeciętny Rzut
         var rzut = Math.floor((Math.random()*100))%6;
-        var tekst = "\nRezultat: `" + wyniki[rzut]+ "`";
-        message.reply(tekst);
+        var tekst = "Rezultat: ***" + wyniki[rzut] + "***";
+        const embed = new Discord.RichEmbed()
+            .setAuthor("Przeciętny rzut!", client.user.avatarURL)
+            .setColor("#ffaa00")
+            .setDescription(tekst);
+        message.channel.send({embed});
     }
     else if(command === 'oheth') { //Trudny Rzut
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
-        var tekst = "\nTwoje rzuty: `" + wyniki[rzut1] + "` oraz `" + wyniki[rzut2] + "`\n";
+        var tekst = "Twoje rzuty: *" + wyniki[rzut1] + "* oraz *" + wyniki[rzut2] + "*\n";
         if(rzut1 > rzut2) {
-            tekst += "Rezultat: `" + wyniki[rzut2] + "`";
+            tekst += "Rezultat: ***" + wyniki[rzut2] + "***";
         }
         else {
-            tekst += "Rezultat: `" + wyniki[rzut1] + "`";
+            tekst += "Rezultat: ***" + wyniki[rzut1] + "***";
         }
-        message.reply(tekst);
+        const embed = new Discord.RichEmbed()
+            .setAuthor("Trudny rzut!", client.user.avatarURL)
+            .setColor("#aa0000")
+            .setDescription(tekst);
+        message.channel.send({embed});
     }
     else if(command === 'ohetr') { //Tabela Reakcji
         var rzut1 = (Math.floor((Math.random()*100))%6) + 1;
         var rzut2 = (Math.floor((Math.random()*100))%6) + 1;
-        var tekst = "\nSuma rzutów: `" + (rzut1+rzut2) + " (" + rzut1 + " + " + rzut2 + ")`\n";
+        var tekst = "Suma rzutów: *" + (rzut1+rzut2) + "[" + rzut1 + " + " + rzut2 + "]*\n";
         switch(rzut1+rzut2) {
             case 2:
-                tekst += "Rezultat: `" + reakcje[0] + "`";
+                tekst += "Rezultat: ***" + reakcje[0] + "***";
             break;
             case 3:
-                tekst += "Rezultat: `" + reakcje[1] + "`";
+                tekst += "Rezultat: ***" + reakcje[1] + "***";
             break;
             case 4:
             case 5:
-                tekst += "Rezultat: `" + reakcje[2] + "`";
+                tekst += "Rezultat: ***" + reakcje[2] + "***";
             break;
             case 6:
             case 7:
             case 8:
-                tekst += "Rezultat: `" + reakcje[3] + "`";
+                tekst += "Rezultat: ***" + reakcje[3] + "***";
             break;
             case 9:
             case 10:
-                tekst += "Rezultat: `" + reakcje[4] + "`";
+                tekst += "Rezultat: ***" + reakcje[4] + "***";
             break;
             case 11:
-                tekst += "Rezultat: `" + reakcje[5] + "`";
+                tekst += "Rezultat: ***" + reakcje[5] + "***";
             break;
             case 12:
-                tekst += "Rezultat: `" + reakcje[6] + "`";
+                tekst += "Rezultat: ***" + reakcje[6] + "***";
         }
-        message.reply(tekst);
+        const embed = new Discord.RichEmbed()
+            .setAuthor("Tabela reakcji przeciwników.", client.user.avatarURL)
+            .setColor("#0000aa")
+            .setDescription(tekst);
+        message.channel.send({embed});
     }
     else if(command === 'ohett') { //Tabela Pułapek
         var rzut1 = Math.floor((Math.random()*100))%6;
         var rzut2 = Math.floor((Math.random()*100))%6;
-        var tekst = "\nWiersz: `" + (rzut1+1) + "`, Kolumna: `" + (rzut2+1) + "`\n";
-        tekst += "Rezultat: `" + pulapki[rzut1][rzut2] + "`";
-        message.reply(tekst);
+        var tekst = "Wiersz: *" + (rzut1+1) + "*, Kolumna: *" + (rzut2+1) + "*\n";
+        tekst += "Rezultat: ***" + pulapki[rzut1][rzut2] + "***";
+        const embed = new Discord.RichEmbed()
+        .setAuthor("Tabela pułapek.", client.user.avatarURL)
+            .setColor("#0000aa")
+            .setDescription(tekst);
+        message.channel.send({embed});
     }
     else if(command === 'ohetrm') { //Losowe Spotkanie arg[0] - koncept, arg[1] = 1 - ilosc
         var koncept = args[0];
@@ -212,8 +206,12 @@ client.on('message', message => {
         else
             iloscPotworow = 1;
 
-        var tekst = "\nSpotkanie losowe(koncepcja): `" + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut2] + "`";
-        message.reply(tekst);
+        var tekst = "Rezultat: ***" + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut2] + "***";
+        const embed = new Discord.RichEmbed()
+            .setAuthor("Spotkanie losowe.", client.user.avatarURL)
+            .setColor("#0000aa")
+            .setDescription(tekst);
+        message.channel.send({embed});
     }
 });
 
