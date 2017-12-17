@@ -73,7 +73,7 @@ client.on('message', message => {
             tekst += "Rezultat: ***" + wyniki[rzut2] + "***";
         }
         const embed = new Discord.RichEmbed()
-            .setAuthor("Łatwy test!", client.user.avatarURL)
+            .setAuthor(message.author.username + " - Łatwy test!", message.author.avatarURL)
             .setColor("#00aa00")
             .setDescription(tekst);
         message.channel.send({embed});
@@ -82,7 +82,7 @@ client.on('message', message => {
         var rzut = Math.floor((Math.random()*100))%6;
         var tekst = "Rezultat: ***" + wyniki[rzut] + "***";
         const embed = new Discord.RichEmbed()
-            .setAuthor("Przeciętny test!", client.user.avatarURL)
+            .setAuthor(message.author.username + " - Przeciętny test!", message.author.avatarURL)
             .setColor("#ffaa00")
             .setDescription(tekst);
         message.channel.send({embed});
@@ -98,7 +98,7 @@ client.on('message', message => {
             tekst += "Rezultat: ***" + wyniki[rzut1] + "***";
         }
         const embed = new Discord.RichEmbed()
-            .setAuthor("Trudny test!", client.user.avatarURL)
+            .setAuthor(message.author.username + " - Trudny test!", message.author.avatarURL)
             .setColor("#aa0000")
             .setDescription(tekst);
         message.channel.send({embed});
@@ -134,7 +134,7 @@ client.on('message', message => {
                 tekst += "Rezultat: ***" + reakcje[6] + "***";
         }
         const embed = new Discord.RichEmbed()
-            .setAuthor("Tabela reakcji przeciwników.", client.user.avatarURL)
+            .setAuthor(message.author.username + " - Tabela reakcji przeciwników.", message.author.avatarURL)
             .setColor("#0000aa")
             .setDescription(tekst);
         message.channel.send({embed});
@@ -145,7 +145,7 @@ client.on('message', message => {
         var tekst = "Wiersz: *" + (rzut1+1) + "*, Kolumna: *" + (rzut2+1) + "*\n";
         tekst += "Rezultat: ***" + pulapki[rzut1][rzut2] + "***";
         const embed = new Discord.RichEmbed()
-        .setAuthor("Tabela pułapek.", client.user.avatarURL)
+        .setAuthor(message.author.username + " - Tabela pułapek.", message.author.avatarURL)
             .setColor("#0000aa")
             .setDescription(tekst);
         message.channel.send({embed});
@@ -209,29 +209,30 @@ client.on('message', message => {
 
         var tekst = "Rezultat: ***" + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut2] + "***";
         const embed = new Discord.RichEmbed()
-            .setAuthor("Spotkanie losowe.", client.user.avatarURL)
+            .setAuthor(message.author.username + " - Spotkanie losowe.", message.author.avatarURL)
             .setColor("#0000aa")
             .setDescription(tekst);
         message.channel.send({embed});
     }
     else if(command === 'ohetd') { //Rzut kośćmi. args[0] - ilość oraz rodzaj kości
-          var rzut;
-          var arg = args[0].split("d");
-          var suma = 0;
-          var tekst = "[d" + arg[1] + ": ";
-          for(i = 0; i < arg[0]; i++) {
-              rzut = (Math.floor((Math.random()*100))%arg[1])+1;
-              suma += rzut;
-              tekst += rzut + ", "; 
-          }
-          tekst = tekst.slice(0, -2);
-          tekst += "]\n" + "Rezultat: ***" + suma + "***";
-          const embed = new Discord.RichEmbed()
-              .setAuthor("Rzut kośćmi.", client.user.avatarURL)
-              .setColor("#ffff00")
-              .setDescription(tekst);
-          message.channel.send({embed});
-      }
+        var rzut;
+        var arg = args[0].split("d");
+        var suma = 0;
+        var tekst = "[d" + arg[1] + ": ";
+        for(i = 0; i < arg[0]; i++) {
+            rzut = (Math.floor((Math.random()*100))%arg[1])+1;
+            suma += rzut;
+            tekst += rzut + ", "; 
+        }
+        tekst = tekst.slice(0, -2);
+        tekst += "]\n" + "Rezultat: ***" + suma + "***";
+        const embed = new Discord.RichEmbed()
+            .setAuthor(message.author.username + " - Rzut kośćmi.", message.author.avatarURL)
+            .setColor("#ffff00")
+            .setDescription(tekst);
+        message.channel.send({embed});
+    }
+});
 });
 
 client.login(process.env.BOT_TOKEN);
