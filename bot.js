@@ -53,6 +53,7 @@ client.on('message', message => {
             .addField(".OHETE", "Łatwy test.")
             .addField(".OHETM", "Przeciętny test.")
             .addField(".OHETH", "Trudny test.")
+            .addField(".OHETD Kość", "Rzut kośćmi.\nKość - Ilość oraz rodzaj kości.[np. 1d6, 3d20, itp.]")
             .addField(".OHETR", "Tabela reakcji przeciwników.")
             .addField(".OHETT", "Tabela pułapek.")
             .addField(".OHETRM Koncepcja Ilość[opcjonalne]", "Spotkanie losowe.\nKoncepcja - Suma koncepcji druzyny\nIlość - Ilość członków drużyny.[Standardowo = 1]")
@@ -213,6 +214,24 @@ client.on('message', message => {
             .setDescription(tekst);
         message.channel.send({embed});
     }
+    else if(command === 'ohetd') { //Rzut kośćmi. args[0] - ilość oraz rodzaj kości
+          var rzut;
+          var arg = args[0].split("d");
+          var suma = 0;
+          var tekst = "[d" + arg[1] + ": ";
+          for(i = 0; i < arg[0]; i++) {
+              rzut = (Math.floor((Math.random()*100))%arg[1])+1;
+              suma += rzut;
+              tekst += rzut + ", "; 
+          }
+          tekst = tekst.slice(0, -2);
+          tekst += "]\n" + "Rezultat: ***" + suma + "***";
+          const embed = new Discord.RichEmbed()
+              .setAuthor("Rzut kośćmi.", client.user.avatarURL)
+              .setColor("#ffff00")
+              .setDescription(tekst);
+          message.channel.send({embed});
+      }
 });
 
 client.login(process.env.BOT_TOKEN);
