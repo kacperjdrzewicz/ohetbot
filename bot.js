@@ -151,63 +151,57 @@ client.on('message', message => {
         message.channel.send({embed});
     }
     else if(command === 'ohetrm') { //Losowe Spotkanie arg[0] - koncept, arg[1] = 1 - ilosc
-        var koncept = args[0];
+        var koncept = (typeof args[0] === 'undefined') ? 10 : Number(args[0]);
         var ilosc = (typeof args[1] === 'undefined') ? 1 : Number(args[1]);
-        var srednia = Math.floor(koncept/ilosc);
-        var wartosc = [];
-        var sumaWartosci = 0;
-
-        for(i = srednia; i >= 4; i--) {
-            if(i === srednia) wartosc[i] = 13;
-            else if(srednia-5 <= i)
-                wartosc[i] = 10;
-            else {
-                var zmienna = 10-((srednia-5-i)*2);
-                wartosc[i] = (zmienna < 1) ? 1 : zmienna;
-            }
-        }
-
-        for(i = srednia; i <= 23; i++) {
-            if(i === srednia) wartosc[i] = 13;
-            if(srednia+3 >= i)
-                wartosc[i] = 10;
-            else {
-                var zmienna = 10-((i-srednia+3)*2);
-                wartosc[i] = (zmienna < 1) ? 1 : zmienna;
-            }
-        }
-
-        for(i = 4; i < 24; i++) {
-            sumaWartosci += wartosc[i];
-            wartosc[i] = sumaWartosci;
-        }
-        var rzut1 = Math.floor((Math.random()*1000)%sumaWartosci) + 1;
+        var srednia = 4 * Math.floor(Math.floor(koncept/ilosc)/4);
+        srednia = (srednia <= 4) ? 4 : (srednia >= 20) ? 20 : srednia;
+        var rzut; // = (Math.floor((Math.random()*100))%6) + 1;
         var koncepcjaPotwora;
-
-        for(i = 4; i < 24; i++) {
-            if(rzut1 <= wartosc[i]) {
-                koncepcjaPotwora = i;
-                break;
-            }
-        }
-        var rzut2 = Math.floor((Math.random()*10)%stwory[koncepcjaPotwora].length);
-
-        var rzut3 = (Math.floor((Math.random()*100))%6) + 1;
-
         var iloscPotworow;
+        var silaPotworow = 0;
 
-        if(srednia - koncepcjaPotwora > 5)
-            iloscPotworow = Math.floor(rzut3/2 + 2 + ilosc*2);
-        else if(srednia - koncepcjaPotwora > 0)
-            iloscPotworow = Math.floor(rzut3/2 + 1 + ilosc);
-        else if(srednia - koncepcjaPotwora === 0)
-            iloscPotworow = Math.floor(rzut3/2 + ilosc);
-        else if(srednia - koncepcjaPotwora >= -3)
-            iloscPotworow = Math.floor(rzut3/3 + ilosc);
+        var tekst = "Twoje rzuty: *";
+        
+        do {
+            rzut = (Math.floor((Math.random()*100))%6) + 1;
+            tekst += rzut + ", ";
+            switch(rzut) {
+                case 1:
+                if(srednia != 4) srednia -= 4;
+                silaPotworow++;
+                break;
+                case 2:
+                koncepcjaPotwora = srednia;
+                break;
+                case 3:
+                koncepcjaPotwora = srednia + 1;
+                break;
+                case 4:
+                koncepcjaPotwora = srednia + 2;
+                break;
+                case 5:
+                koncepcjaPotwora = srednia + 3;
+                break;
+                case 6:
+                if(srednia != 20) srednia += 4;
+                silaPotworow--;
+            }
+        }while(rzut == 1 || rzut == 6);
+
+        rzut = (Math.floor((Math.random()*100))%6) + 1;
+        tekst += rzut + "*\n";
+
+        if(silaPotworow < 0) 
+            iloscPotworow = Math.floor(rzut/(Math.abs(silaPotworow)*3)) + 1;
+        else if(silaPotworow > 0)
+            iloscPotworow = rzut + (Math.abs(silaPotworow)*ilosc);
         else
-            iloscPotworow = 1;
+            iloscPotworow = rzut;
 
-        var tekst = "Rezultat: ***" + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut2] + "***";
+        rzut = Math.floor((Math.random()*10)%stwory[koncepcjaPotwora].length);
+
+        tekst += "Rezultat: ***" + iloscPotworow + "x " + stwory[koncepcjaPotwora][rzut] + "***";
+
         const embed = new Discord.RichEmbed()
             .setAuthor(message.author.username + " - Spotkanie losowe.", message.author.avatarURL)
             .setColor("#0000aa")
