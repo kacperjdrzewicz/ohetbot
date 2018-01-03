@@ -16,7 +16,7 @@ pulapki[5] = ["pełzające pod skórą robactwo", "obłęd", "pasożyt mózgu", 
 
 var stwory = [];
 stwory[4] = ["Goblin(4)", "Kobold(4)", "Leśny duszek(4)"];
-stwory[5] = ["Wielki nietoperz(5)", "Ognisty robak(5)", ];
+stwory[5] = ["Wielki nietoperz(5)", "Ognisty robak(5)", "Ropurożec(5)"];
 stwory[6] = ["Wielki szczur(6)", "Szkielet(6)"];
 stwory[7] = ["Szaleniec/kultysta(7)", "Diablik(7)"];
 stwory[8] = ["Ork(8)", "Wielki skorpion(8)", "Upiór(8)"];
