@@ -1,6 +1,6 @@
 {
   "name": "OHETBot",
-  "version": "1_1",
+  "version": "1.18.01.03",
   "description": "Bot do gry fabularnej OHET.",
   "main": "bot.js",
   "author": "GaniGhost",
