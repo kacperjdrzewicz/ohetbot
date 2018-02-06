@@ -1,6 +1,3 @@
-var mongo = require('mongodb').MongoClient;
-var url = process.env.MONGODB_URL;
-
 const Discord = require("discord.js");
 
 const client = new Discord.Client();
