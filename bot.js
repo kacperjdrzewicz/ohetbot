@@ -151,7 +151,13 @@ client.on('message', message => {
         message.channel.send({embed});
     }
     else if(command === 'ohetrm') { //Losowe Spotkanie arg[0] - koncept, arg[1] = 1 - ilosc
-        var koncept = (typeof args[0] === 'undefined') ? 10 : Number(args[0]);
+        var tekst = "Chwilowo wyłączone";
+        const embed = new Discord.RichEmbed()
+        .setAuthor(message.author.username + " - Losowe Spotkanie.", message.author.avatarURL)
+            .setColor("#0000aa")
+            .setDescription(tekst);
+        message.channel.send({embed});
+        /* var koncept = (typeof args[0] === 'undefined') ? 10 : Number(args[0]);
         var ilosc = (typeof args[1] === 'undefined') ? 1 : Number(args[1]);
         var srednia = 4 * Math.floor(Math.floor(koncept/ilosc)/4);
         srednia = (srednia <= 4) ? 4 : (srednia >= 20) ? 20 : srednia;
@@ -206,10 +212,16 @@ client.on('message', message => {
             .setAuthor(message.author.username + " - Spotkanie losowe.", message.author.avatarURL)
             .setColor("#0000aa")
             .setDescription(tekst);
-        message.channel.send({embed});
+        message.channel.send({embed}); */
     }
     else if(command === 'ohetd') { //Rzut kośćmi. args[0] - ilość oraz rodzaj kości
-        var rzut;
+        var tekst = "Chwilowo wyłączone";
+        const embed = new Discord.RichEmbed()
+        .setAuthor(message.author.username + " - Rzut kośćmi.", message.author.avatarURL)
+            .setColor("#0000aa")
+            .setDescription(tekst);
+        message.channel.send({embed});
+        /* var rzut;
         var arg = args[0].split("d");
         var suma = 0;
         var tekst = "[d" + arg[1] + ": ";
@@ -224,7 +236,7 @@ client.on('message', message => {
             .setAuthor(message.author.username + " - Rzut kośćmi.", message.author.avatarURL)
             .setColor("#ffff00")
             .setDescription(tekst);
-        message.channel.send({embed});
+        message.channel.send({embed}); */
     }
 });
 
